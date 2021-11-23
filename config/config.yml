@@ -1,0 +1,7 @@
+file-server:
+  - name: Example file
+    file: /var/www/test.json
+    endpoint: /myfolder/test.json
+
+logging:
+  level: info
