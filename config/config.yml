@@ -1,3 +1,6 @@
+server:
+  port: 5140
+
 file-server:
   - name: Example file
     file: /var/www/test.json

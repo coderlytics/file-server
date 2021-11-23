@@ -4,7 +4,9 @@ go 1.17
 
 require (
 	github.com/creasty/defaults v1.5.2
+	github.com/go-chi/chi/v5 v5.0.7
 	github.com/go-playground/validator/v10 v10.9.0
+	github.com/sirupsen/logrus v1.8.1
 	github.com/spf13/viper v1.9.0
 )
 
