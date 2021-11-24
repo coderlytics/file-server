@@ -3,8 +3,10 @@ package server
 import (
 	"fmt"
 	"net/http"
+	"path/filepath"
 
 	"github.com/go-chi/chi/v5"
+	"github.com/go-chi/chi/v5/middleware"
 	log "github.com/sirupsen/logrus"
 )
 
@@ -34,6 +36,18 @@ func initLogging() {
 // run starts the actual server
 func run() {
 	router := chi.NewRouter()
-
+	router.Use(middleware.Logger)
+	buildRoutes(router)
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", Config.FileServer.Port), router))
+}
+
+// buildRoots sets up all routes from the configuration file
+func buildRoutes(router chi.Router) {
+	for _, file := range Config.Files {
+		filename := filepath.Base(file.Endpoint)
+		router.Get(file.Endpoint, func(rw http.ResponseWriter, r *http.Request) {
+			rw.Header().Set("Content-Disposition", fmt.Sprintf("attachment; filename=%s", filename))
+			http.ServeFile(rw, r, file.FilePath)
+		})
+	}
 }
