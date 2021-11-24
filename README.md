@@ -4,7 +4,7 @@ The idea of this project is to have a small server which serves defined files vi
 
 ## Getting started
 
-1. Download the latest release
+1. Download the latest release (currently only available for windows)
 2. Copy the example configuration from the "config/" directory
 3. Start the file server "file-server.exe -config config.yml"
 
