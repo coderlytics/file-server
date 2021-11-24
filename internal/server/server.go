@@ -1,6 +1,7 @@
 package server
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/go-chi/chi/v5"
@@ -34,5 +35,5 @@ func initLogging() {
 func run() {
 	router := chi.NewRouter()
 
-	log.Fatal(http.ListenAndServe(Config.Server.Port, router))
+	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", Config.FileServer.Port), router))
 }

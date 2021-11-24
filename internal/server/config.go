@@ -8,18 +8,13 @@ import (
 
 // Configuration is the configuration structure which holds all config values
 type Configuration struct {
-	Server     Server     `mapstructure:"server"`
-	FileServer FileServer `mapstructure:"file-server"`
-	Logging    Logging    `mapstructure:"logging"`
-}
-
-// Server holds the basic configuration for the server
-type Server struct {
-	Port string `mapstructure:"port" validate:"number" default:"5140"`
+	FileServer `mapstructure:"file-server"`
+	Logging    Logging `mapstructure:"logging"`
 }
 
 // FileServer holds the basic configuration for the served files
 type FileServer struct {
+	Port  string `mapstructure:"port" validate:"number" default:"5140"`
 	Files []File
 }
 

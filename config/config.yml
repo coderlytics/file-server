@@ -1,10 +1,9 @@
-server:
-  port: 5140
-
 file-server:
-  - name: Example file
-    file: /var/www/test.json
-    endpoint: /myfolder/test.json
+  port: 5140
+  files:
+    - name: Example file
+      file: /var/www/test.json
+      endpoint: /myfolder/test.json
 
 logging:
   level: info
