@@ -1,0 +1,2 @@
+GET http://localhost:5140/myfolder/test.json
+Authorization: 4790d6b24dbd11ec81d30242ac130003

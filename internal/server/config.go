@@ -28,6 +28,7 @@ type File struct {
 	Name     string `mapstructure:"name"`
 	FilePath string `mapstructure:"file"`
 	Endpoint string `mapstructure:"endpoint"`
+	Token    string `mapstructure:"token"`
 }
 
 var Config Configuration

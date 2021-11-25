@@ -44,10 +44,24 @@ func run() {
 // buildRoots sets up all routes from the configuration file
 func buildRoutes(router chi.Router) {
 	for _, file := range Config.Files {
-		filename := filepath.Base(file.Endpoint)
-		router.Get(file.Endpoint, func(rw http.ResponseWriter, r *http.Request) {
-			rw.Header().Set("Content-Disposition", fmt.Sprintf("attachment; filename=%s", filename))
-			http.ServeFile(rw, r, file.FilePath)
-		})
+		fmt.Printf("%v\n", file)
+
+		router.Get(file.Endpoint, func(file File) func(rw http.ResponseWriter, r *http.Request) {
+			return func(rw http.ResponseWriter, r *http.Request) {
+				// if token is set, authorization check will be performed
+				if len(file.Token) > 0 {
+					println("auth required")
+					auth := r.Header.Get("Authorization")
+
+					if file.Token != auth {
+						http.Error(rw, http.StatusText(http.StatusUnauthorized), http.StatusUnauthorized)
+						return
+					}
+				}
+
+				rw.Header().Set("Content-Disposition", fmt.Sprintf("attachment; filename=%s", filepath.Base(file.Endpoint)))
+				http.ServeFile(rw, r, file.FilePath)
+			}
+		}(file))
 	}
 }

@@ -2,8 +2,12 @@ file-server:
   port: 5140
   files:
     - name: Example file
-      file: /var/www/test.json
+      file: C:\_admin\dev\coderlytics\test.json
       endpoint: /myfolder/test.json
+      token: 4790d6b24dbd11ec81d30242ac130003
+    - name: Example file 1
+      file: C:\_admin\dev\coderlytics\test1.json
+      endpoint: /myfolder/test1.json
 
 logging:
   level: info
