@@ -44,7 +44,6 @@ func run() {
 // buildRoots sets up all routes from the configuration file
 func buildRoutes(router chi.Router) {
 	for _, file := range Config.Files {
-		fmt.Printf("%v\n", file)
 
 		router.Get(file.Endpoint, func(file File) func(rw http.ResponseWriter, r *http.Request) {
 			return func(rw http.ResponseWriter, r *http.Request) {
