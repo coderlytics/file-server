@@ -3,6 +3,7 @@ package server
 import (
 	"fmt"
 	"net/http"
+	"os"
 	"path/filepath"
 
 	"github.com/go-chi/chi/v5"
@@ -30,6 +31,14 @@ func initLogging() {
 
 	if log.GetLevel() == log.TraceLevel {
 		log.SetReportCaller(true)
+	}
+
+	// log to file
+	file, err := os.OpenFile("file-server.log", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
+	if err == nil {
+		log.SetOutput(file)
+	} else {
+		log.Info("Failed to log to file, using default stderr")
 	}
 }
 
